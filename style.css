@@ -1,0 +1,169 @@
+body{
+    margin: 0;
+}
+
+/*******************  Header Start  ******************************/
+header{
+    height: 100px;
+    background-color: orange;
+}
+
+.headerContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.headerLeftIcons{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.headerTitle{
+    font-size: 32px;
+    color: whitesmoke;
+    padding-left: 10px;
+}
+
+.deliverandoImg{
+    height: 70px;
+    width: 70px;
+    object-fit: contain;
+    padding: 15px;
+}
+
+
+.germanyFlagImg{
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    
+    border-radius: 100%;
+}
+
+
+.solidBarImg{
+    height: 40px;
+    width: 40px;
+    object-fit: contain;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-right: 25px;
+    padding-left:25px;
+}
+/*******************  Header End  *******************************/
+
+
+
+
+/****************************************************************************************************************************************************************/
+/*********************************************************  Body Content Start  *********************************************************************************/
+.shopImg{
+    height: 200px;
+    
+}
+
+.shopImg img{
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+    object-position: middle;
+}
+
+
+.content{
+    display: flex;
+}
+
+.leftContent{
+    height: 3000px; /*provisorische Höhe, Später wenn Inhalt gefüllt ist-braucht es nicht mehr*/
+    width: 70%;
+    background-color: whitesmoke;
+}
+
+.rightShoppingCart{
+    width: 30%;
+    height: 100vh;
+    background-color: rgba(230, 227, 185, 0.562);
+    position: sticky; /*Es bleibt geklebt an seine Seite und Füllt 100% von Bildschirmhöhe*/
+    top: 0;
+}
+
+.card{
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    margin: 20px 20px 20px 0px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-start; 
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.card:hover{
+    background-color: rgba(209, 204, 196, 0.377);
+}
+
+.cardLeftCorner h3,p {
+    margin: unset;
+    padding: 10px;
+    
+}
+
+.cardRightCorner{
+    display: flex;
+}
+
+.cardRightCorner p{
+    margin: unset;
+    padding-right: 0px;
+    padding-top: 27px;
+}
+
+.plusImg{
+    height: 25px;
+    width: 25px;
+    object-fit: cover;
+    border-radius: 100%;
+}
+
+
+/*********************************************************  Body Content End  ***********************************************************************************/
+/****************************************************************************************************************************************************************/
+
+
+
+
+
+/*******************  Footer Start  *******************************/
+footer{
+    height: 300px;
+    background-color: gray;
+}
+
+
+/*******************  Footer End  *********************************/
+
+
+
+
+
+
+
+/*******************default Styles*******************************/
+.textCenter{
+    text-align: center;
+}
+
+.defaultMarginLeft{
+    margin-left:30px;
+}
+
+
+
+
+
+/*****************************************************************/
