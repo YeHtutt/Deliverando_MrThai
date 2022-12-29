@@ -87,13 +87,15 @@ header{
 .rightShoppingCart{
     width: 30%;
     height: 100vh;
-    background-color: rgba(230, 227, 185, 0.562);
+    background-color: rgba(230, 227, 185, 0.5);
     position: sticky; /*Es bleibt geklebt an seine Seite und Füllt 100% von Bildschirmhöhe*/
     top: 0;
+    border-left: 2px solid rgba(0, 0, 0, 0.4);
+    border-top: 2px solid rgba(0, 0, 0, 0.4);
 }
 
 .card{
-    border: 1px solid rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.7);
     margin: 20px 20px 20px 0px;
     padding: 10px;
     display: flex;
@@ -128,6 +130,31 @@ header{
     width: 25px;
     object-fit: cover;
     border-radius: 100%;
+}
+
+
+
+.basketContent{
+    display: flex;
+    justify-content: space-between; 
+    padding: 10px;
+}
+
+.basketContent div{
+    display: flex;
+    gap: 8px;
+}
+
+.adjustButtons{
+    display: flex;
+    justify-content: space-between; 
+    padding: 10px;
+}
+
+.baskeElementBorder{
+    border-top: 2px solid rgba(0, 0, 0, 0.4);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.4);
+    margin-bottom: 5px;
 }
 
 

@@ -1,4 +1,4 @@
-let mainDishes = [
+let mainDishes = [ //die Gerichte des Restaurants 
     {
         "name": "Gebratene Nudeln",
         "description": "Wahl aus: vegetarisch || Entenfleisch || Ganelen || Hühnerfleisch und mehr",
@@ -41,6 +41,7 @@ let mainDishes = [
     }
 ];
 
+let inBasketDishes = []; //Gerichte im Einkaufwagen
 
 function render(){
     let dish = document.getElementById('restaurantDishes');
@@ -49,7 +50,7 @@ function render(){
     for (let i = 0; i < mainDishes.length; i++) {
         const elementMainDish = mainDishes[i];
         dish.innerHTML += `
-        <div class="card" onclick="addToBasket${i}">
+        <div class="card" onclick="addToBasket(${i})">
             <div class="cardLeftCorner">
                 <h3>${elementMainDish['name']}</h3>
                 <p>${elementMainDish['description']}</p>
@@ -63,7 +64,52 @@ function render(){
     }
 }
 
+function addToBasket(i){ //bestimmten Index von render() wurde per Klick ausgewählt
+    let basketItem = mainDishes[i]; //dieses Element von Index wird an basketItem übergeben
+    if(checkFoodInBasket(mainDishes[i])){
+        basketItem['amount'] +=1;
+    }
+    else{
+        basketItem['amount'] =1; //mind. ein Gericht wurde hinzugefügt
+        basketItem['priceSum'] =0; //Zwischen Summe Berehnung nicht erforderlich, weil Anzahl-1 und der Preis angezeigt wird
+        inBasketDishes.push(basketItem); //Einkaufswagen Array wird mit Auswahl Gericht hinzugefügt
+        console.log('inBasketDishes')
+    }
+    renderBasket(); //Es zeigt am Ende Einkaufswagen an
+}
 
 
+function checkFoodInBasket(dishViaIndex){
+    for (let i = 0; i < inBasketDishes.length; i++) {
+        const elementValid = inBasketDishes[i];
+        if(dishViaIndex['name'] == elementValid['name']) //prüft ob HauptGerichte Alle Auswahlindexe schon ein mal in Einkaufswagen-Array gibt
+        {return true}; 
+    }
+}
+
+
+function renderBasket(){
+    let basket = document.getElementById('shoppingBasketContent');
+    basket.innerHTML ='';
+    for (let i = 0; i < inBasketDishes.length; i++) {
+        const basketElement = inBasketDishes[i];
+        basket.innerHTML += `
+        <div class="baskeElementBorder">
+            <div class="basketContent">
+                <div>
+                    <div>${basketElement['amount']}</div> x <div>${basketElement['name']}</div>    
+                </div>
+                <div>
+                    <div>${basketElement['price'].toFixed(2)} €</div>
+                </div>
+            </div>
+            <div class="adjustButtons">
+                <button class="amountDecreaseBtn" onclick="decreaseAmount(${i}), renderBasket()">-</button>
+                <button class="amountIncreaseBtn" onclick="increaseAmount(${i}), renderBasket()">+</button>
+            </div>
+        </div>
+        `;
+    }
+}
 
 
