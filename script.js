@@ -88,11 +88,13 @@ function checkFoodInBasket(dishViaIndex){
 }
 
 
-function renderBasket(){
+function renderBasket(){ //Alle Elemente im Einkaufswagen zeigen
     let basket = document.getElementById('shoppingBasketContent');
     basket.innerHTML ='';
     for (let i = 0; i < inBasketDishes.length; i++) {
-        const basketElement = inBasketDishes[i];
+        const basketElement = inBasketDishes[i]; //einzelne im Einkaufwagen Elemente werden Index für Index an leeres Element zugewiesen
+        //dabei wird im rechten Container Menge * Produkt und Preis ausgegeben
+        //unten folgen zwei Button (Menge-reduzieren)   (Menge-erweitern)
         basket.innerHTML += `
         <div class="baskeElementBorder">
             <div class="basketContent">
@@ -100,7 +102,7 @@ function renderBasket(){
                     <div>${basketElement['amount']}</div> x <div>${basketElement['name']}</div>    
                 </div>
                 <div>
-                    <div>${basketElement['price'].toFixed(2)} €</div>
+                    <div>${calculateDish(basketElement).toFixed(2)}</div>
                 </div>
             </div>
             <div class="adjustButtons">
@@ -110,6 +112,38 @@ function renderBasket(){
         </div>
         `;
     }
+    updateBasketTotalSum(); //Zwischen Summe und Total Berechnung
 }
 
+
+function calculateDish(basketElement){ //Berechnung für ZwischenSumme von bestimmten Array Index(Zeile)
+    basketElement['priceSum'] = +basketElement['amount'] * +basketElement['price']; //dabei wird die ZwischenSumme in die ZwischenSum. Spalte['priceSum'] des EinkaufswagenArray gespeichert
+    return basketElement['priceSum']; //Zwischen Summe wird zurückgegeben
+}
+
+function updateBasketTotalSum(){
+    let subTotal =0; //ZwischenSumme
+    let total=0;       //Summe
+    for (let i = 0; i < inBasketDishes.length; i++) {
+        const element = inBasketDishes[i]; //einzelne im Einkaufwagen Elemente werden Index für Index an leeres Element zugewiesen
+        subTotal += calculateDish(element); //dieses Element Spalte ['priceSum'] wird zurückgegeben und wird jedes mal mit Zwischensumme addiert
+    }
+    total = 4 +subTotal; //hier wird ZwischenSum. mit Lieferkosten adddiert
+    document.getElementById('subTotal').innerHTML = subTotal.toFixed(2); //in seinen Container Ergebnis rein schreiben
+    document.getElementById('total').innerHTML = total.toFixed(2); //in seinen Container Ergebnis rein schreiben
+}
+
+
+function increaseAmount(i){ //beim dem ausgewählten JSON-Index wird beim klicken die Anzahl-Spalte des Array inkrementiert
+    inBasketDishes[i]['amount'] +=1;
+    renderBasket(); //Elemente im Einkaufswagen zeigen
+}
+
+function decreaseAmount(i){ //beim dem ausgewählten JSON-Index wird beim klicken die Anzahl-Spalte des Array dekrementiert
+    inBasketDishes[i]['amount'] -=1;
+    if(inBasketDishes[i]['amount']==0){ //Wenn Anzahl ist 0, dann JSON-Array slektierten Index Array-Element aus Einkaufswagen löschen
+        inBasketDishes.splice(i,1);
+    }
+    renderBasket(); //Elemente im Einkaufswagen zeigen
+}
 

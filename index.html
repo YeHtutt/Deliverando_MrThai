@@ -46,10 +46,38 @@
 
 
         <div class="rightShoppingCart">
-            <h2 class="textCenter">Einkaufswagen</h2>
-            <h3 class="textCenter">(Ab 25€ kostenlose Lieferung)</h3>
-            <div class="shoppingBasketContent" id="shoppingBasketContent"></div>
+            <div class="shoppingBasketListContainer">
+                <h2 class="textCenter">Einkaufswagen</h2>
+                <h3 class="textCenter">(Ab 25€ kostenlose Lieferung)</h3>
+                <div class="shoppingBasketContent" id="shoppingBasketContent"></div>
+            </div>
+            
+            <div class="invoiceContainer">
+                <div class="invoice">
+                <div>Zwischensumme</div>
+                <div><span id="subTotal"></span> €</div>
+                </div>
+            
+                <div class="invoice">
+                <div>Lieferkosten</div>
+                <div>4,00 €</div>
+                </div>
+
+                <div class="invoice">
+                <div><b>Gesamt</b></div>
+                <div><b><span id="total"></span> €</b></div>
+                </div>
+                <div>
+                    <button class="orderButton">Bestellen</button>
+                </div>
+                
+            </div>
+
+            
+
+            
         </div>
+
     </div>
 
 
