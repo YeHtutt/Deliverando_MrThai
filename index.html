@@ -8,6 +8,7 @@
     <title>Deliverando</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+    <link rel="stylesheet" href="fonts.css">
 
     <header>
         <div class="headerContainer">
@@ -32,7 +33,7 @@
 
     <div class="content">
 
-        <div class="leftContent" id="leftContent">
+        <div class="leftContent" id="leftContent">  <!--linke Seite Restaurant-->
             <div class="shopImg">
                 <img src="img/ThaiFood.jpg">
             </div>
@@ -45,47 +46,45 @@
         </div>
 
 
-        <div class="rightShoppingCart">
-
-
+        <div class="rightShoppingCart">     <!--die rechte Seite Einkaufswagen-->
 
             <div id="emptyBasket" class="emptyBasket">
                 <div class="emptyBasketImg">
-                    <img src="img/lock.png" >
+                    <img src="img/lock.png">
                 </div>
                 <h2 class="textCenter">Einkaufwagen ist leer!</h2>
                 <p class="textCenter">Bestellung kann losgelegt werden.</p>
             </div>
 
-            <div class="shoppingBasketListContainer d-none" id="shoppingBasketListContainer">
-                <h2 class="textCenter">Einkaufswagen</h2>
-                <h3 class="textCenter">(Ab 25€ kostenlose Lieferung)</h3>
-                <div class="shoppingBasketContent" id="shoppingBasketContent"></div>
+            <div class="ShopingBasketContainer">        
+                <div class="shoppingBasketListContainer d-none" id="shoppingBasketListContainer">
+                    <div class="basketTxtTop">
+                    <h2 class="textCenter basketTitle">Warenkorb</h2> 
+                    <p class="textCenter basketDescription">(Ab 25€ kostenlose Lieferung)</p> 
+                    </div>
+                   <div class="shoppingBasketContent" id="shoppingBasketContent"></div>
+                </div>
+
+                <div class="invoiceContainer d-none" id="invoiceContainer">
+                    <div class="invoice">
+                        <div>Zwischensumme</div>
+                        <div><span id="subTotal"></span> €</div>
+                    </div>
+
+                    <div class="invoice">
+                        <div>Lieferkosten</div>
+                        <div>4,00 €</div>
+                    </div>
+
+                    <div class="invoice">
+                        <div><b>Gesamt</b></div>
+                        <div><b><span id="total"></span> €</b></div>
+                    </div>
+                    <div>
+                        <button class="orderButton" onclick="order()">Bestellen</button>
+                    </div>
+                </div>
             </div>
-
-            <div class="invoiceContainer d-none" id="invoiceContainer">
-                <div class="invoice">
-                    <div>Zwischensumme</div>
-                    <div><span id="subTotal"></span> €</div>
-                </div>
-
-                <div class="invoice">
-                    <div>Lieferkosten</div>
-                    <div>4,00 €</div>
-                </div>
-
-                <div class="invoice">
-                    <div><b>Gesamt</b></div>
-                    <div><b><span id="total"></span> €</b></div>
-                </div>
-                <div>
-                    <button class="orderButton" onclick="order()">Bestellen</button>
-                </div>
-
-            </div>
-
-
-
 
         </div>
 
@@ -95,7 +94,7 @@
 
 
 
-    <footer></footer>
+    <!--<footer></footer>-->
 
 </body>
 

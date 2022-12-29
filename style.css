@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    font-family: 'Lato', sans-serif;
 }
 
 /*******************  Header Start  ******************************/
@@ -93,13 +94,9 @@ header {
     position: sticky;
     /*Es bleibt geklebt an seine Seite und Füllt 100% von Bildschirmhöhe*/
     top: 0;
-    border-left: 2px solid rgba(0, 0, 0, 0.4);
-    border-top: 2px solid rgba(0, 0, 0, 0.4);
+    border: 2px solid rgba(204, 109, 109, 0.692);
+    /*border-top: 2px solid rgba(0, 0, 0, 0.4);*/
 }
-
-/*.shoppingBasketListContainer{
-    max-height: 400px;
-}*/
 
 
 .card {
@@ -114,7 +111,7 @@ header {
 }
 
 .card:hover {
-    background-color: rgba(209, 204, 196, 0.377);
+    background-color: rgba(253, 252, 250, 0.164);
 }
 
 .cardLeftCorner h3,
@@ -126,12 +123,31 @@ p {
 
 .cardRightCorner {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+
+}
+
+.cardRightCorner button{
+    padding: unset;
+    margin: unset;
+    font-size: 25px;
+    padding-right: 5px;
+    padding-left: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;;
+    border: 1px solid rgba(0, 0, 0, 0.7);
+}
+
+.cardRightCorner button:hover{
+    background-color: rgba(235, 181, 96, 0.377);
 }
 
 .cardRightCorner p {
-    margin: unset;
-    padding-right: 0px;
-    padding-top: 27px;
+    padding: unset;
+    margin-top:10px;
 }
 
 .plusImg {
@@ -140,13 +156,25 @@ p {
     object-fit: cover;
     border-radius: 100%;
 }
+/*************************************************************************************************************************/
+.basketTxtTop{
+    padding: 10px;
+    margin: 20px;
+}
 
+.basketTitle{
+    margin:0px;
+}
 
+.basketDescription{
+    padding:0;
+}
 
 .basketContent {
     display: flex;
     justify-content: space-between;
     padding: 10px;
+    
 }
 
 .basketContent div {
@@ -161,17 +189,26 @@ p {
 }
 
 .baskeElementBorder {
-    border: 2px solid rgba(150, 146, 146, 0.466);
-    margin: 10px;
-    border-radius: 10px;
+    /*border-top: 1px solid rgba(150, 146, 146, 0.466);*/
+    padding-top: 5px;
+    box-shadow: 2px 1px 2px 0 rgba(0, 0, 0, 0.6); /*nur bei Y-Achse unten, weil positiver Wert. (Wenn negativ dann Y oben)*/
+}
+
+.shoppingBasketContent{
+    width: inherit;
+    overflow-y: scroll; /*Y-Achsche Scrollbar*/
+    overflow-x: hidden;
+    max-height: calc(100vh - 400px);
+    position: sticky;
+    top: 150px;
+    background-color: rgba(255, 255, 255, 0.75);
 }
 
 
-.invoiceContainer {
-    width: inherit;
+.invoiceContainer{
+    width: 30%; /*30% Breite wie EinkaufswagenContainer*/
     position: fixed;
     bottom: 0;
-   
 }
 
 .invoice {
@@ -184,7 +221,7 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: orange;
+    background-color:rgb(252, 179, 43); 
     border-radius: 10px;
     width: 90%;
     margin: 5%;
@@ -196,6 +233,10 @@ p {
     cursor: pointer;
 }
 
+.orderButton:hover{
+    background-color: orange;
+}
+
 .emptyBasketImg{
     display: flex;
     justify-content: center;
@@ -203,9 +244,36 @@ p {
 }
 
 
+.amountIncreaseBtn{
+    padding: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 3px;
+}
+
+.amountIncreaseBtn:hover{
+    background-color: rgba(235, 181, 96, 0.377);
+}
+
+.amountDecreaseBtn{
+    padding-top: 1px;
+    padding-right: 7px;
+    padding-left: 7px;
+}
+
+.amountDecreaseBtn:hover{
+    background-color: rgba(235, 181, 96, 0.377);
+}
+
+
+/*.ShopingBasketContainer{
+    position: absolut;
+    bottom: 0;
+}*/
+
+
 /*********************************************************  Body Content End  ***********************************************************************************/
 /****************************************************************************************************************************************************************/
-
 
 
 
@@ -218,8 +286,6 @@ footer {
 
 
 /*******************  Footer End  *********************************/
-
-
 
 
 

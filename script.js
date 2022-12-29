@@ -50,14 +50,19 @@ function render(){
     for (let i = 0; i < mainDishes.length; i++) {
         const elementMainDish = mainDishes[i];
         dish.innerHTML += `
-        <div class="card" onclick="addToBasket(${i})">
+        <div class="card">
             <div class="cardLeftCorner">
                 <h3>${elementMainDish['name']}</h3>
                 <p>${elementMainDish['description']}</p>
             </div>
 
             <div class="cardRightCorner">
-                <p>${elementMainDish['price'].toFixed(2)} €</p>
+                <div onclick="addToBasket(${i})">
+                    <button>+</button>
+                </div>
+                <div>
+                    <p>${elementMainDish['price'].toFixed(2)} €</p>
+                </div>
             </div>
         </div>
         `;
@@ -89,7 +94,8 @@ function checkFoodInBasket(dishViaIndex){
 
 
 function renderBasket(){ //Alle Elemente im Einkaufswagen zeigen
-    let basket = document.getElementById('shoppingBasketContent');
+    let basket = document.getElementById('shoppingBasketContent'); //ShopingBasketContainer
+   // let basket = document.getElementById('ShopingBasketContainer');
     basket.innerHTML ='';
     checkBasketStatus(); //hier Seite Einkaufswagen wird vom Leer zu den Inhalte geändert
     for (let i = 0; i < inBasketDishes.length; i++) {
