@@ -91,6 +91,7 @@ function checkFoodInBasket(dishViaIndex){
 function renderBasket(){ //Alle Elemente im Einkaufswagen zeigen
     let basket = document.getElementById('shoppingBasketContent');
     basket.innerHTML ='';
+    checkBasketStatus(); //hier Seite Einkaufswagen wird vom Leer zu den Inhalte geändert
     for (let i = 0; i < inBasketDishes.length; i++) {
         const basketElement = inBasketDishes[i]; //einzelne im Einkaufwagen Elemente werden Index für Index an leeres Element zugewiesen
         //dabei wird im rechten Container Menge * Produkt und Preis ausgegeben
@@ -128,7 +129,11 @@ function updateBasketTotalSum(){
         const element = inBasketDishes[i]; //einzelne im Einkaufwagen Elemente werden Index für Index an leeres Element zugewiesen
         subTotal += calculateDish(element); //dieses Element Spalte ['priceSum'] wird zurückgegeben und wird jedes mal mit Zwischensumme addiert
     }
-    total = 4 +subTotal; //hier wird ZwischenSum. mit Lieferkosten adddiert
+    if(subTotal<=25){ //Wenn ZwischenSumme unter 25 Euro ist
+        total = 4 +subTotal; //hier wird ZwischenSum. mit Lieferkosten adddiert
+    }else{            
+        total += subTotal; //über 25 Euro kostenlose Lieferung
+    }
     document.getElementById('subTotal').innerHTML = subTotal.toFixed(2); //in seinen Container Ergebnis rein schreiben
     document.getElementById('total').innerHTML = total.toFixed(2); //in seinen Container Ergebnis rein schreiben
 }
@@ -147,3 +152,21 @@ function decreaseAmount(i){ //beim dem ausgewählten JSON-Index wird beim klicke
     renderBasket(); //Elemente im Einkaufswagen zeigen
 }
 
+
+function checkBasketStatus(){ //hier Seite Einkaufswagen wird vom Leer zu den Inhalte geändert
+    if(inBasketDishes.length != 0){ //Wenn irgendwas schon vom Restaurant gewählt ist
+        document.getElementById('emptyBasket').classList.add('d-none');
+        document.getElementById('shoppingBasketListContainer').classList.remove('d-none');
+        document.getElementById('invoiceContainer').classList.remove('d-none');
+    }
+    else{
+        document.getElementById('emptyBasket').classList.remove('d-none');
+        document.getElementById('shoppingBasketListContainer').classList.add('d-none');
+        document.getElementById('invoiceContainer').classList.add('d-none');
+    }
+}
+
+function order() {
+    inBasketDishes.splice(0,inBasketDishes.length);//Einkaufswagen Array wird komplett gelöscht
+    renderBasket(); //Elemente im Einkaufswagen zeigen
+}

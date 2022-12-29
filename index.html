@@ -46,36 +46,47 @@
 
 
         <div class="rightShoppingCart">
-            <div class="shoppingBasketListContainer">
+
+
+
+            <div id="emptyBasket" class="emptyBasket">
+                <div class="emptyBasketImg">
+                    <img src="img/lock.png" >
+                </div>
+                <h2 class="textCenter">Einkaufwagen ist leer!</h2>
+                <p class="textCenter">Bestellung kann losgelegt werden.</p>
+            </div>
+
+            <div class="shoppingBasketListContainer d-none" id="shoppingBasketListContainer">
                 <h2 class="textCenter">Einkaufswagen</h2>
                 <h3 class="textCenter">(Ab 25€ kostenlose Lieferung)</h3>
                 <div class="shoppingBasketContent" id="shoppingBasketContent"></div>
             </div>
-            
-            <div class="invoiceContainer">
+
+            <div class="invoiceContainer d-none" id="invoiceContainer">
                 <div class="invoice">
-                <div>Zwischensumme</div>
-                <div><span id="subTotal"></span> €</div>
-                </div>
-            
-                <div class="invoice">
-                <div>Lieferkosten</div>
-                <div>4,00 €</div>
+                    <div>Zwischensumme</div>
+                    <div><span id="subTotal"></span> €</div>
                 </div>
 
                 <div class="invoice">
-                <div><b>Gesamt</b></div>
-                <div><b><span id="total"></span> €</b></div>
+                    <div>Lieferkosten</div>
+                    <div>4,00 €</div>
+                </div>
+
+                <div class="invoice">
+                    <div><b>Gesamt</b></div>
+                    <div><b><span id="total"></span> €</b></div>
                 </div>
                 <div>
-                    <button class="orderButton">Bestellen</button>
+                    <button class="orderButton" onclick="order()">Bestellen</button>
                 </div>
-                
+
             </div>
 
-            
 
-            
+
+
         </div>
 
     </div>
