@@ -94,7 +94,7 @@ function checkFoodInBasket(dishViaIndex){
 
 
 function renderBasket(){ //Alle Elemente im Einkaufswagen zeigen
-    let basket = document.getElementById('shoppingBasketContent'); //ShopingBasketContainer
+    let basket = document.getElementById('shopingBasketContainer'); //ShopingBasketContainer
    // let basket = document.getElementById('ShopingBasketContainer');
     basket.innerHTML ='';
     checkBasketStatus(); //hier Seite Einkaufswagen wird vom Leer zu den Inhalte geändert
@@ -162,13 +162,13 @@ function decreaseAmount(i){ //beim dem ausgewählten JSON-Index wird beim klicke
 function checkBasketStatus(){ //hier Seite Einkaufswagen wird vom Leer zu den Inhalte geändert
     if(inBasketDishes.length != 0){ //Wenn irgendwas schon vom Restaurant gewählt ist
         document.getElementById('emptyBasket').classList.add('d-none');
-        document.getElementById('shoppingBasketListContainer').classList.remove('d-none');
-        document.getElementById('invoiceContainer').classList.remove('d-none');
+        document.getElementById('basketInvoiceContent').classList.remove('d-none');
+        //document.getElementById('invoiceContainer').classList.remove('d-none');
     }
     else{
         document.getElementById('emptyBasket').classList.remove('d-none');
-        document.getElementById('shoppingBasketListContainer').classList.add('d-none');
-        document.getElementById('invoiceContainer').classList.add('d-none');
+        document.getElementById('basketInvoiceContent').classList.add('d-none');
+        //document.getElementById('invoiceContainer').classList.add('d-none');
     }
 }
 
@@ -176,3 +176,40 @@ function order() {
     inBasketDishes.splice(0,inBasketDishes.length);//Einkaufswagen Array wird komplett gelöscht
     renderBasket(); //Elemente im Einkaufswagen zeigen
 }
+
+
+/*function calMinimumWidth(){
+    var clientWidth = document.getElementById('content').clientWidth;  //PC die Display-Breite lesen in Var. speichern
+    console.log(clientWidth);
+
+    //Wenn Content Container weniger als 1000px dann für Responsive Modus rechte Seite Einkaufswagen Display ausschalten
+    if(clientWidth<=1000){
+        document.getElementById('shoppingBasketContainer').classList.add('d-none');
+    }
+    else //Sonst rechte Seite Einkaufwagen wieder anzeigen
+    {
+        document.getElementById('shoppingBasketContainern').classList.remove('d-none');
+    }
+    render();
+}*/
+
+function showBasket(){ //Einkaufswagen anzeigen
+    //calMinimumWidth();
+    document.getElementById('body').classList.add('no-scroll');
+    document.getElementById('leftContent').classList.add('d-none');
+    document.getElementById('rightShoppingCart').classList.remove('d-none'); //oparcity_transparent_cancel
+    document.getElementById('rightShoppingCart').classList.add('oparcity_Full');
+    document.getElementById('showBasketButton').classList.add('d-none');
+    console.log('show');
+}
+
+function closeBasket(){  //Schließt Auswahlseite beim Klicken Homebutton
+    //calMinimumWidth();
+    document.getElementById('leftContent').classList.remove('d-none');
+    document.getElementById('rightShoppingCart').classList.add('d-none');
+    document.getElementById('showBasketButton').classList.remove('d-none');
+    document.getElementById('body').classList.remove('no-scroll');
+    document.getElementById('rightShoppingCart').classList.add('oparcity_Full');
+    console.log('dontshow');
+}
+

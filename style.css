@@ -87,15 +87,15 @@ header {
     background-color: whitesmoke;
 }
 
+
 .rightShoppingCart {
     width: 30%;
     height: 100vh;
     background-color: rgba(230, 227, 185, 0.5);
-    position: sticky;
-    /*Es bleibt geklebt an seine Seite und Füllt 100% von Bildschirmhöhe*/
-    top: 0;
-    border: 2px solid rgba(204, 109, 109, 0.692);
-    /*border-top: 2px solid rgba(0, 0, 0, 0.4);*/
+    position: sticky; /*Klebend bleiben an seiner Position*/
+    top: 0; /*Wenn oben Abstand weniger als 0 haben soll es klebend bleiben */
+    /*box-shadow: -7px 0px 3px -6px rgba(0, 0, 0, 0.2);*/
+    border: 2px solid rgba(0, 0, 0, 0.45);
 }
 
 
@@ -107,7 +107,7 @@ header {
     justify-content: space-between;
     align-items: flex-start;
     border-radius: 10px;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .card:hover {
@@ -129,7 +129,7 @@ p {
 
 }
 
-.cardRightCorner button{
+.cardRightCorner button {
     padding: unset;
     margin: unset;
     font-size: 25px;
@@ -137,17 +137,18 @@ p {
     padding-left: 5px;
     cursor: pointer;
     margin-top: 10px;
-    border-radius: 5px;;
+    border-radius: 5px;
+    ;
     border: 1px solid rgba(0, 0, 0, 0.7);
 }
 
-.cardRightCorner button:hover{
+.cardRightCorner button:hover {
     background-color: rgba(235, 181, 96, 0.377);
 }
 
 .cardRightCorner p {
     padding: unset;
-    margin-top:10px;
+    margin-top: 10px;
 }
 
 .plusImg {
@@ -156,25 +157,20 @@ p {
     object-fit: cover;
     border-radius: 100%;
 }
+
 /*************************************************************************************************************************/
-.basketTxtTop{
-    padding: 10px;
-    margin: 20px;
+.basketHeader{
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
-.basketTitle{
-    margin:0px;
-}
 
-.basketDescription{
-    padding:0;
-}
 
 .basketContent {
     display: flex;
     justify-content: space-between;
     padding: 10px;
-    
+
 }
 
 .basketContent div {
@@ -191,86 +187,120 @@ p {
 .baskeElementBorder {
     /*border-top: 1px solid rgba(150, 146, 146, 0.466);*/
     padding-top: 5px;
-    box-shadow: 2px 1px 2px 0 rgba(0, 0, 0, 0.6); /*nur bei Y-Achse unten, weil positiver Wert. (Wenn negativ dann Y oben)*/
+    box-shadow: 2px 1px 2px 0 rgba(0, 0, 0, 0.6);
+    /*nur bei Y-Achse unten, weil positiver Wert. (Wenn negativ dann Y oben)*/
 }
 
-.shoppingBasketContent{
-    width: inherit;
-    overflow-y: scroll; /*Y-Achsche Scrollbar*/
+#shopingBasketContainer{
+    margin-bottom: 30px;
+    overflow-y: scroll;
     overflow-x: hidden;
-    max-height: calc(100vh - 400px);
+    max-height: calc(100vh - 360px);
     position: sticky;
-    top: 150px;
-    background-color: rgba(255, 255, 255, 0.75);
+    top: 120px;
 }
 
-
-.invoiceContainer{
-    width: 30%; /*30% Breite wie EinkaufswagenContainer*/
-    position: fixed;
-    bottom: 0;
-}
-
-.invoice {
+.invoiceElement{
     display: flex;
     justify-content: space-between;
-    padding: 8px 16px; /* top and bottom | left and right */
 }
 
+.shoppingBasketInvoiceContent{
+    position: sticky;
+    top: 80vh;
+    bottom: 0px;
+    padding-bottom: 5px;
+    padding: 4px;
+}
+
+
 .orderButton {
+    width: 30vw;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color:rgb(252, 179, 43); 
+    background-color: rgb(252, 179, 43);
     border-radius: 10px;
-    width: 90%;
-    margin: 5%;
-    padding: 10px;
-    height: 32px;
-    font-size: 22px;
+    width: 96%;
+    margin: 2%;
+    height: 30px;
+    font-size: 20px;
     font-size: bold;
     border-color: transparent;
     cursor: pointer;
 }
 
-.orderButton:hover{
+.orderButton:hover {
     background-color: orange;
 }
 
-.emptyBasketImg{
+.emptyBasketImg {
     display: flex;
     justify-content: center;
     margin-top: 100px;
 }
 
 
-.amountIncreaseBtn{
+.amountIncreaseBtn {
     padding: 2px;
     padding-left: 5px;
     padding-right: 5px;
     padding-top: 3px;
 }
 
-.amountIncreaseBtn:hover{
+.amountIncreaseBtn:hover {
     background-color: rgba(235, 181, 96, 0.377);
 }
 
-.amountDecreaseBtn{
+.amountDecreaseBtn {
     padding-top: 1px;
     padding-right: 7px;
     padding-left: 7px;
 }
 
-.amountDecreaseBtn:hover{
+.amountDecreaseBtn:hover {
     background-color: rgba(235, 181, 96, 0.377);
 }
 
 
-/*.ShopingBasketContainer{
-    position: absolut;
-    bottom: 0;
-}*/
+.homeButton {
+    display: none;
+}
 
+
+#showBasketButton {
+    display: none;
+    position: fixed;
+    width: 80vw;
+    background-color: #ff8000;
+    border-radius: 24px;
+    height: 48px;
+    bottom: 32px;
+    left: 10vw;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
+
+#showBasketButton {
+    background-color: #df7002;
+}
+
+
+#leftContent {
+    width: calc(100vw - 400px);
+}
+
+.basket-header {
+    position: sticky;
+    top: 0px;
+    padding: 16px 0;
+    background-color: white;
+    width: inherit;
+    text-align: center;
+    /*z-index: 100;*/
+}
 
 /*********************************************************  Body Content End  ***********************************************************************************/
 /****************************************************************************************************************************************************************/
@@ -300,12 +330,115 @@ footer {
     margin-left: 30px;
 }
 
-.d-none{
-    display: none;
+.d-none {
+    display: none !important;
+}
+
+.no-scroll {
+    overflow-x: hidden;
+}
+
+.oparcity_Full{
+    opacity: 1 !important;
 }
 
 
 
-
-
 /*****************************************************************/
+
+
+
+
+/******************Responsive Mode***********************************************/
+@media(max-width: 1000px) {
+    .headerLeftIcons {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+    }
+
+    .headerRightIcons {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+    }
+
+    .headerTitle {
+        font-size: 24px;
+    }
+
+    .solidBarImg {
+        height: 30px;
+        width: 30px;
+        object-fit: contain;
+    }
+
+    .deliverandoImg {
+        display: none;
+    }
+
+    .germanyFlagImg {
+        display: none;
+    }
+
+    /*************header responsive end*******************/
+
+    .content {
+        flex-direction: column-reverse;
+    }
+
+    .shopImg {
+        width: unset;
+    }
+
+    
+    #leftContent {
+        overflow-y: scroll;
+        overflow-x: hidden;
+    } 
+
+    #leftContent {
+        width: unset;
+        height: 100vh;
+        position: fixed;
+        top: 100px;
+        padding: unset;
+    }
+
+
+
+    #rightShoppingCart {
+        width: unset;
+        opacity: 0;
+    }
+
+    /*#shoppingBasketListContainer {
+        width: unset;
+    }*/
+
+    #invoiceContainer {
+        width: 100%;
+    }
+
+
+    #showBasketButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+
+    .homeButton {
+        height: 66px;
+        width: 56px;
+        object-fit: cover;
+        display: unset;
+        cursor: pointer;
+    }
+
+    .basketHeader {
+        display: flex;
+        justify-content: center;
+    }
+}

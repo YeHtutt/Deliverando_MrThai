@@ -29,11 +29,10 @@
 
 </head>
 
-<body onload="render()">
+<body onload="render()" id="body">
 
-    <div class="content">
-
-        <div class="leftContent" id="leftContent">  <!--linke Seite Restaurant-->
+    <div class="content" id="content">
+        <div class="leftContent" id="leftContent"> <!--linke Seite Restaurant-->
             <div class="shopImg">
                 <img src="img/ThaiFood.jpg">
             </div>
@@ -46,52 +45,49 @@
         </div>
 
 
-        <div class="rightShoppingCart">     <!--die rechte Seite Einkaufswagen-->
+        <div class="rightShoppingCart" id="rightShoppingCart"> <!--die rechte Seite Einkaufswagen Kontainer-->
+
+            <div class="basketHeader" id="basketHeader">
+                <h2 class="textCenter">Warenkorb</h2>
+                <img class="homeButton" src="img/homebutton-black.png" onclick="closeBasket()">
+            </div>
 
             <div id="emptyBasket" class="emptyBasket">
                 <div class="emptyBasketImg">
                     <img src="img/lock.png">
                 </div>
-                <h2 class="textCenter">Einkaufwagen ist leer!</h2>
-                <p class="textCenter">Bestellung kann losgelegt werden.</p>
+                <h2 class="textCenter">Fülle deinen Warenkorb</h2>
+                <p class="textCenter">Ab 25€ Bestellung wird kostenlos geliefert!</p>
+                <p class="textCenter">nach deiner Wahl die beste Gerichte aussuchen und bestellen.</p>
             </div>
 
-            <div class="ShopingBasketContainer">        
-                <div class="shoppingBasketListContainer d-none" id="shoppingBasketListContainer">
-                    <div class="basketTxtTop">
-                    <h2 class="textCenter basketTitle">Warenkorb</h2> 
-                    <p class="textCenter basketDescription">(Ab 25€ kostenlose Lieferung)</p> 
-                    </div>
-                   <div class="shoppingBasketContent" id="shoppingBasketContent"></div>
+
+            <div id="shopingBasketContainer"> </div> <!--Einkaufswagen mit den BasketRenderElemente-->
+
+            <div class="shoppingBasketInvoiceContent d-none" id="basketInvoiceContent"> <!--Einkaufswagen mit den RechnungsElemente-->
+
+                <div class="invoiceElement">
+                    <div>Zwischensumme</div>
+                    <div><span id="subTotal"></span> €</div>
                 </div>
 
-                <div class="invoiceContainer d-none" id="invoiceContainer">
-                    <div class="invoice">
-                        <div>Zwischensumme</div>
-                        <div><span id="subTotal"></span> €</div>
-                    </div>
-
-                    <div class="invoice">
-                        <div>Lieferkosten</div>
-                        <div>4,00 €</div>
-                    </div>
-
-                    <div class="invoice">
-                        <div><b>Gesamt</b></div>
-                        <div><b><span id="total"></span> €</b></div>
-                    </div>
-                    <div>
-                        <button class="orderButton" onclick="order()">Bestellen</button>
-                    </div>
+                <div class="invoiceElement">
+                    <div>Lieferkosten</div>
+                    <div>4,00 €</div>
                 </div>
+
+                <div class="invoiceElement">
+                    <div><b>Gesamt</b></div>
+                    <div><b><span id="total"></span> €</b></div>
+                </div>
+                <div class="orderButton" onclick="order()">Bestellen</div>
             </div>
+
 
         </div>
 
+        <div id="showBasketButton" onclick="showBasket()">Warenkorb</div>
     </div>
-
-
-
 
 
     <!--<footer></footer>-->
