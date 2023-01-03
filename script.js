@@ -42,41 +42,52 @@ let mainDishes = [ //die Gerichte des Restaurants
 ];
 
 let inBasketDishes = []; //Gerichte im Einkaufwagen
+let totalvarForHomepage = 0;
 
-function render(){
+
+function render() {
     let dish = document.getElementById('restaurantDishes');
     dish.innerHTML = '';
 
     for (let i = 0; i < mainDishes.length; i++) {
         const elementMainDish = mainDishes[i];
-        dish.innerHTML += `
-        <div class="card">
-            <div class="cardLeftCorner">
-                <h3>${elementMainDish['name']}</h3>
-                <p>${elementMainDish['description']}</p>
-            </div>
-
-            <div class="cardRightCorner">
-                <div onclick="addToBasket(${i})">
-                    <button>+</button>
-                </div>
-                <div>
-                    <p>${elementMainDish['price'].toFixed(2)} €</p>
-                </div>
-            </div>
-        </div>
-        `;
+        dish.innerHTML += htmlMainDish(elementMainDish, i);
     }
+    renderBasket();
+    updateBasketTotalSum();
+    document.getElementById('showBasketTotalPrice').innerHTML = 'Gesamt: ' + totalvarForHomepage;
 }
 
-function addToBasket(i){ //bestimmten Index von render() wurde per Klick ausgewählt
+function htmlMainDish(elementMainDish, i) {
+    return `
+    <div class="card">
+    <div class="cardLeftCorner">
+        <h3>${elementMainDish['name']}</h3>
+        <p>${elementMainDish['description']}</p>
+    </div>
+
+    <div class="cardRightCorner">
+        <div onclick="addToBasket(${i})">
+            <button>+</button>
+        </div>
+        <div>
+            <p>${elementMainDish['price'].toFixed(2)} €</p>
+        </div>
+    </div>
+    </div>
+    `;
+}
+
+
+
+function addToBasket(i) { //bestimmten Index von render() wurde per Klick ausgewählt
     let basketItem = mainDishes[i]; //dieses Element von Index wird an basketItem übergeben
-    if(checkFoodInBasket(mainDishes[i])){
-        basketItem['amount'] +=1;
+    if (checkFoodInBasket(mainDishes[i])) {
+        basketItem['amount'] += 1;
     }
-    else{
-        basketItem['amount'] =1; //mind. ein Gericht wurde hinzugefügt
-        basketItem['priceSum'] =0; //Zwischen Summe Berehnung nicht erforderlich, weil Anzahl-1 und der Preis angezeigt wird
+    else {
+        basketItem['amount'] = 1; //mind. ein Gericht wurde hinzugefügt
+        basketItem['priceSum'] = 0; //Zwischen Summe Berehnung nicht erforderlich, weil Anzahl-1 und der Preis angezeigt wird
         inBasketDishes.push(basketItem); //Einkaufswagen Array wird mit Auswahl Gericht hinzugefügt
         console.log('inBasketDishes')
     }
@@ -84,132 +95,121 @@ function addToBasket(i){ //bestimmten Index von render() wurde per Klick ausgew�
 }
 
 
-function checkFoodInBasket(dishViaIndex){
+function checkFoodInBasket(dishViaIndex) {
     for (let i = 0; i < inBasketDishes.length; i++) {
         const elementValid = inBasketDishes[i];
-        if(dishViaIndex['name'] == elementValid['name']) //prüft ob HauptGerichte Alle Auswahlindexe schon ein mal in Einkaufswagen-Array gibt
-        {return true}; 
+        if (dishViaIndex['name'] == elementValid['name']) //prüft ob HauptGerichte Alle Auswahlindexe schon ein mal in Einkaufswagen-Array gibt
+        { return true };
     }
 }
 
 
-function renderBasket(){ //Alle Elemente im Einkaufswagen zeigen
+function renderBasket() { //Alle Elemente im Einkaufswagen zeigen
     let basket = document.getElementById('shopingBasketContainer'); //ShopingBasketContainer
-   // let basket = document.getElementById('ShopingBasketContainer');
-    basket.innerHTML ='';
+    // let basket = document.getElementById('ShopingBasketContainer');
+    basket.innerHTML = '';
     checkBasketStatus(); //hier Seite Einkaufswagen wird vom Leer zu den Inhalte geändert
     for (let i = 0; i < inBasketDishes.length; i++) {
         const basketElement = inBasketDishes[i]; //einzelne im Einkaufwagen Elemente werden Index für Index an leeres Element zugewiesen
         //dabei wird im rechten Container Menge * Produkt und Preis ausgegeben
         //unten folgen zwei Button (Menge-reduzieren)   (Menge-erweitern)
-        basket.innerHTML += `
-        <div class="baskeElementBorder">
-            <div class="basketContent">
-                <div>
-                    <div>${basketElement['amount']}</div> x <div>${basketElement['name']}</div>    
-                </div>
-                <div>
-                    <div>${calculateDish(basketElement).toFixed(2)}</div>
-                </div>
-            </div>
-            <div class="adjustButtons">
-                <button class="amountDecreaseBtn" onclick="decreaseAmount(${i}), renderBasket()">-</button>
-                <button class="amountIncreaseBtn" onclick="increaseAmount(${i}), renderBasket()">+</button>
-            </div>
-        </div>
-        `;
+        basket.innerHTML += htmlBasket(basketElement,i);
     }
     updateBasketTotalSum(); //Zwischen Summe und Total Berechnung
 }
 
+function htmlBasket(basketElement, i){
+    return `
+    <div class="baskeElementBorder">
+        <div class="basketContent">
+            <div>
+                <div>${basketElement['amount']}</div> x <div>${basketElement['name']}</div>    
+            </div>
+            <div>
+                <div>${calculateDish(basketElement).toFixed(2)} €</div>
+            </div>
+        </div>
+        <div class="adjustButtons">
+            <button class="amountDecreaseBtn" onclick="decreaseAmount(${i}), renderBasket()">-</button>
+            <button class="amountIncreaseBtn" onclick="increaseAmount(${i}), renderBasket()">+</button>
+        </div>
+    </div>
+    `;
+}
 
-function calculateDish(basketElement){ //Berechnung für ZwischenSumme von bestimmten Array Index(Zeile)
+
+function calculateDish(basketElement) { //Berechnung für ZwischenSumme von bestimmten Array Index(Zeile)
     basketElement['priceSum'] = +basketElement['amount'] * +basketElement['price']; //dabei wird die ZwischenSumme in die ZwischenSum. Spalte['priceSum'] des EinkaufswagenArray gespeichert
     return basketElement['priceSum']; //Zwischen Summe wird zurückgegeben
 }
 
-function updateBasketTotalSum(){
-    let subTotal =0; //ZwischenSumme
-    let total=0;       //Summe
+function updateBasketTotalSum() {
+    let subTotal = 0; //ZwischenSumme
+    let total = 0;       //Summe
     for (let i = 0; i < inBasketDishes.length; i++) {
         const element = inBasketDishes[i]; //einzelne im Einkaufwagen Elemente werden Index für Index an leeres Element zugewiesen
         subTotal += calculateDish(element); //dieses Element Spalte ['priceSum'] wird zurückgegeben und wird jedes mal mit Zwischensumme addiert
     }
-    if(subTotal<=25){ //Wenn ZwischenSumme unter 25 Euro ist
-        total = 4 +subTotal; //hier wird ZwischenSum. mit Lieferkosten adddiert
-    }else{            
-        total += subTotal; //über 25 Euro kostenlose Lieferung
+    if (subTotal <= 25) { //Wenn ZwischenSumme unter 25 Euro ist
+        total = 4 + subTotal; //hier wird ZwischenSum. mit Lieferkosten adddiert
+    } else {
+        total += subTotal; //über 25 Euro kostenlose Lieferung  
     }
     document.getElementById('subTotal').innerHTML = subTotal.toFixed(2); //in seinen Container Ergebnis rein schreiben
     document.getElementById('total').innerHTML = total.toFixed(2); //in seinen Container Ergebnis rein schreiben
+    //totalvarForHomepage =total;
+    console.log(`${totalvarForHomepage}`);
 }
 
 
-function increaseAmount(i){ //beim dem ausgewählten JSON-Index wird beim klicken die Anzahl-Spalte des Array inkrementiert
-    inBasketDishes[i]['amount'] +=1;
+function increaseAmount(i) { //beim dem ausgewählten JSON-Index wird beim klicken die Anzahl-Spalte des Array inkrementiert
+    inBasketDishes[i]['amount'] += 1;
     renderBasket(); //Elemente im Einkaufswagen zeigen
 }
 
-function decreaseAmount(i){ //beim dem ausgewählten JSON-Index wird beim klicken die Anzahl-Spalte des Array dekrementiert
-    inBasketDishes[i]['amount'] -=1;
-    if(inBasketDishes[i]['amount']==0){ //Wenn Anzahl ist 0, dann JSON-Array slektierten Index Array-Element aus Einkaufswagen löschen
-        inBasketDishes.splice(i,1);
+function decreaseAmount(i) { //beim dem ausgewählten JSON-Index wird beim klicken die Anzahl-Spalte des Array dekrementiert
+    inBasketDishes[i]['amount'] -= 1;
+    if (inBasketDishes[i]['amount'] == 0) { //Wenn Anzahl ist 0, dann JSON-Array selektierten Index Array-Element aus Einkaufswagen löschen
+        inBasketDishes.splice(i, 1);
     }
     renderBasket(); //Elemente im Einkaufswagen zeigen
 }
 
 
-function checkBasketStatus(){ //hier Seite Einkaufswagen wird vom Leer zu den Inhalte geändert
-    if(inBasketDishes.length != 0){ //Wenn irgendwas schon vom Restaurant gewählt ist
+function checkBasketStatus() { //hier Seite Einkaufswagen wird vom Leer zu den Inhalte geändert
+    if (inBasketDishes.length != 0) { //Wenn irgendwas schon vom Restaurant gewählt ist
         document.getElementById('emptyBasket').classList.add('d-none');
         document.getElementById('basketInvoiceContent').classList.remove('d-none');
-        //document.getElementById('invoiceContainer').classList.remove('d-none');
     }
-    else{
+    else {
         document.getElementById('emptyBasket').classList.remove('d-none');
         document.getElementById('basketInvoiceContent').classList.add('d-none');
-        //document.getElementById('invoiceContainer').classList.add('d-none');
     }
 }
 
 function order() {
-    inBasketDishes.splice(0,inBasketDishes.length);//Einkaufswagen Array wird komplett gelöscht
+    inBasketDishes.splice(0, inBasketDishes.length);//Einkaufswagen Array wird komplett gelöscht
     renderBasket(); //Elemente im Einkaufswagen zeigen
 }
 
 
-/*function calMinimumWidth(){
-    var clientWidth = document.getElementById('content').clientWidth;  //PC die Display-Breite lesen in Var. speichern
-    console.log(clientWidth);
-
-    //Wenn Content Container weniger als 1000px dann für Responsive Modus rechte Seite Einkaufswagen Display ausschalten
-    if(clientWidth<=1000){
-        document.getElementById('shoppingBasketContainer').classList.add('d-none');
-    }
-    else //Sonst rechte Seite Einkaufwagen wieder anzeigen
-    {
-        document.getElementById('shoppingBasketContainern').classList.remove('d-none');
-    }
-    render();
-}*/
-
-function showBasket(){ //Einkaufswagen anzeigen
-    //calMinimumWidth();
+function showBasket() { //Einkaufswagen anzeigen
     document.getElementById('body').classList.add('no-scroll');
     document.getElementById('leftContent').classList.add('d-none');
     document.getElementById('rightShoppingCart').classList.remove('d-none'); //oparcity_transparent_cancel
     document.getElementById('rightShoppingCart').classList.add('oparcity_Full');
     document.getElementById('showBasketButton').classList.add('d-none');
+    document.getElementById('showBasketTotalPrice').classList.add('d-none');
     console.log('show');
 }
 
-function closeBasket(){  //Schließt Auswahlseite beim Klicken Homebutton
-    //calMinimumWidth();
+function closeBasket() {  //Schließt Auswahlseite beim Klicken Homebutton
     document.getElementById('leftContent').classList.remove('d-none');
     document.getElementById('rightShoppingCart').classList.add('d-none');
     document.getElementById('showBasketButton').classList.remove('d-none');
     document.getElementById('body').classList.remove('no-scroll');
     document.getElementById('rightShoppingCart').classList.add('oparcity_Full');
+    document.getElementById('showBasketTotalPrice').classList.remove('d-none');
     console.log('dontshow');
 }
 
