@@ -53,9 +53,6 @@ function render() {
         const elementMainDish = mainDishes[i];
         dish.innerHTML += htmlMainDish(elementMainDish, i);
     }
-    renderBasket();
-    updateBasketTotalSum();
-    document.getElementById('showBasketTotalPrice').innerHTML = 'Gesamt: ' + totalvarForHomepage;
 }
 
 function htmlMainDish(elementMainDish, i) {
@@ -106,16 +103,14 @@ function checkFoodInBasket(dishViaIndex) {
 
 function renderBasket() { //Alle Elemente im Einkaufswagen zeigen
     let basket = document.getElementById('shopingBasketContainer'); //ShopingBasketContainer
-    // let basket = document.getElementById('ShopingBasketContainer');
     basket.innerHTML = '';
-    checkBasketStatus(); //hier Seite Einkaufswagen wird vom Leer zu den Inhalte geändert
+    checkBasketStatus(); 
     for (let i = 0; i < inBasketDishes.length; i++) {
         const basketElement = inBasketDishes[i]; //einzelne im Einkaufwagen Elemente werden Index für Index an leeres Element zugewiesen
-        //dabei wird im rechten Container Menge * Produkt und Preis ausgegeben
-        //unten folgen zwei Button (Menge-reduzieren)   (Menge-erweitern)
         basket.innerHTML += htmlBasket(basketElement,i);
     }
-    updateBasketTotalSum(); //Zwischen Summe und Total Berechnung
+    updateBasketTotalSum();
+    showTotalPriceOnHomeScreen();
 }
 
 function htmlBasket(basketElement, i){
@@ -157,7 +152,7 @@ function updateBasketTotalSum() {
     }
     document.getElementById('subTotal').innerHTML = subTotal.toFixed(2); //in seinen Container Ergebnis rein schreiben
     document.getElementById('total').innerHTML = total.toFixed(2); //in seinen Container Ergebnis rein schreiben
-    //totalvarForHomepage =total;
+    totalvarForHomepage =total.toFixed(2);
     console.log(`${totalvarForHomepage}`);
 }
 
@@ -213,3 +208,9 @@ function closeBasket() {  //Schließt Auswahlseite beim Klicken Homebutton
     console.log('dontshow');
 }
 
+function showTotalPriceOnHomeScreen(){
+    document.getElementById('showBasketTotalPrice').innerHTML = 'Gesamt: ' + totalvarForHomepage + ' €'; //die Zeile wird aufgerufen, sobald sich im Warenkorb was ändert
+    if (inBasketDishes == 0){  
+        document.getElementById('showBasketTotalPrice').innerHTML = '';
+    }
+}
