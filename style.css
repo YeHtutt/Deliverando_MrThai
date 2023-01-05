@@ -1,10 +1,11 @@
-html{
+html {
     background-color: whitesmoke;
 }
 
 body {
     margin: 0;
     font-family: 'Lato', sans-serif;
+    overflow-x: hidden;
 }
 
 /*******************  Header Start  ******************************/
@@ -92,7 +93,21 @@ header {
 }
 
 
-.rightShoppingCart {
+/*.rightShoppingCart {
+    width: 30%;
+    height: 100vh;
+    background-color: rgba(230, 227, 185, 0.5);
+    position: sticky;
+    /*Klebend bleiben an seiner Position*/
+/*top: 0;
+    /*Wenn oben Abstand weniger als 0 haben soll es klebend bleiben */
+/*box-shadow: -7px 0px 3px -6px rgba(0, 0, 0, 0.2);*/
+/* border: 2px solid rgba(0, 0, 0, 0.45);
+}*/
+
+#rightShoppingCart {
+    opacity: 1;
+    display: inline;
     width: 30%;
     height: 100vh;
     background-color: rgba(230, 227, 185, 0.5);
@@ -402,10 +417,6 @@ footer {
 
     /*************header responsive end*******************/
 
-    /*.content {
-        flex-direction: column-reverse;
-    } */
-
     .content {
         overflow-y: scroll;
         overflow-x: hidden;
@@ -418,11 +429,6 @@ footer {
         width: unset;
     }
 
-
-    /*.leftContent {
-        overflow-y: scroll;
-        overflow-x: hidden;
-    }*/
 
     #leftContent {
         width: unset;
@@ -440,7 +446,7 @@ footer {
 
     #rightShoppingCart {
         width: unset;
-        opacity: 0;
+        opacity: 0; /*Anfang Zustand beim Responsive -> in den showBasket() und closeBasket werden manipuliert*/
         width: 100vw;
         height: 90vh;
     }

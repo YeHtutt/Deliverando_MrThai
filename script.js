@@ -191,7 +191,7 @@ function order() {
 function showBasket() { //Einkaufswagen anzeigen
     document.getElementById('body').classList.add('no-scroll');
     document.getElementById('leftContent').classList.add('d-none');
-    document.getElementById('rightShoppingCart').classList.remove('d-none'); //oparcity_transparent_cancel
+    checkBasketStatus();
     document.getElementById('rightShoppingCart').classList.add('oparcity_Full');
     document.getElementById('showBasketButton').classList.add('d-none');
     document.getElementById('showBasketTotalPrice').classList.add('d-none');
@@ -200,10 +200,11 @@ function showBasket() { //Einkaufswagen anzeigen
 
 function closeBasket() {  //Schließt Auswahlseite beim Klicken Homebutton
     document.getElementById('leftContent').classList.remove('d-none');
-    document.getElementById('rightShoppingCart').classList.add('d-none');
+    checkBasketStatus();
+    document.getElementById('rightShoppingCart').classList.remove('oparcity_Full');
+    document.getElementById('rightShoppingCart').style = 'oparcity: 0;';
     document.getElementById('showBasketButton').classList.remove('d-none');
     document.getElementById('body').classList.remove('no-scroll');
-    document.getElementById('rightShoppingCart').classList.add('oparcity_Full');
     document.getElementById('showBasketTotalPrice').classList.remove('d-none');
     console.log('dontshow');
 }
